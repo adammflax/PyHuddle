@@ -4,7 +4,7 @@ from ..api import Api
 from ..calendar.calendar import  Calendar
 from ..huddle_errors import  HuddleConflictError
 from ..hyperlink_resource import HyperLinkResource
-from ..create_mutipart_form_request import UploadFile
+from ..create_mutipart_form_request import MultiPartFormRequest
 
 __author__ = 'adam.flax'
 
@@ -124,7 +124,7 @@ class Document(Api):
         newVersionUrl = self.lazyGet().getLink("create-version")
         assert newVersionUrl is not None
 
-        uploadFile = UploadFile(file)
+        uploadFile = MultiPartFormRequest(file)
 
         header = self._baseHeader.copy()
         header['Content-type'] = "application/vnd.huddle.data+json"
@@ -323,7 +323,7 @@ class Folder(Api):
         assert isinstance(index, int) or index is None
         header = self._baseHeader.copy().copy()
         header['Content-Type'] = "application/vnd.huddle.data+json"
-        uploadFile = UploadFile(file)
+        uploadFile = MultiPartFormRequest(file)
 
         skeletonDocument= {"title" : uploadFile.title, "description" : description, "extension" : uploadFile.extension}
         jsonString = json.dumps(skeletonDocument)

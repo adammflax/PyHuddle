@@ -5,7 +5,7 @@ import uuid
 
 __author__ = 'adam.flax'
 
-class UploadFile(object):
+class MultiPartFormRequest(object):
     """
     Used by both the folder and document class as both may need to do similar items for uploading/editing a file
     """

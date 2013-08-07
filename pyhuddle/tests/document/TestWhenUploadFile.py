@@ -1,6 +1,6 @@
 import io
 import unittest
-from pyhuddle.api.create_mutipart_form_request import UploadFile
+from pyhuddle.api.create_mutipart_form_request import MultiPartFormRequest
 from pyhuddle.tests.document.fakeFile import FakeFile
 
 __author__ = 'adam.flax'
@@ -9,7 +9,7 @@ class WhenWeSendFileToUploadFile(unittest.TestCase):
 
     def setUp(self):
         file = FakeFile("test.txt", "content")
-        self._result = UploadFile(file)
+        self._result = MultiPartFormRequest(file)
 
         data = io.StringIO()
         data.write('--%s\r\n' % "fake")
