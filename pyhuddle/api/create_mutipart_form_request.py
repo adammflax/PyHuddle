@@ -39,26 +39,14 @@ class MultiPartFormRequest(object):
 
         data = StringIO()
         data.write('--%s\r\n' % boundary)
-        data.write('Content-Disposition: form-data; name=name=IAmAHardCodedValue; filename="%s"\r\n' % self.name)
+        data.write('Content-Disposition: form-data; name=IAmAHardCodedValue; filename="%s"\r\n' % self.name)
         data.write('Content-Type: %s\r\n' % self.mime)
         data.write('\r\n')
         data.write('%s\r\n'% self._binary)
         data.write('--%s--' % boundary)
 
         return data.getvalue()
-
-        """
-        data = []
-        data.append('--' + boundary)
-        data.append('Content-Disposition: form-data; name=IAmAHardCodedValue;' + " filename=" + '"' + self.name + '"')
-        data.append("Content-Type:" + self.mime)
-        data.append('')
-        data.append(self._binary.decode('utf-8'))
-        data.append('--' + boundary + "--")
-
-        return "\r\n".join(data)
-        """
-
+    
     def create_Boundary_String(self):
         """
         Returns our boundaryString needed. The boundaryString should be a unique string NOT found in the document. You

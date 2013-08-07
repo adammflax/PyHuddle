@@ -13,7 +13,7 @@ class WhenWeSendFileToUploadFile(unittest.TestCase):
 
         data = io.StringIO()
         data.write('--%s\r\n' % "fake")
-        data.write('Content-Disposition: form-data; name=name=IAmAHardCodedValue; filename="%s"\r\n' % "test.txt")
+        data.write('Content-Disposition: form-data; name=IAmAHardCodedValue; filename="%s"\r\n' % "test.txt")
         data.write('Content-Type: %s\r\n' % "text/plain")
         data.write('\r\n')
         data.write('%s\r\n'% "content")
