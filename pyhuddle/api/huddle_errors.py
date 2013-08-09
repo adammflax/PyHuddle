@@ -49,9 +49,9 @@ class HuddleGoneError(HuddleBadResponseError):
     def __init__(self, body):
         HuddleBadResponseError.__init__(self, "410", body)
 
-class HandleCodeResponse(object):
+class HandleCodeResponse():
 
-    def handleResponseError(self, response):
+    def CheckForErrors(self, response):
         code = int(response['Headers']['status'])
         typeOfCode = code // 100
 

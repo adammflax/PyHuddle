@@ -20,7 +20,7 @@ class FakeParser(object):
 
         parser.set("API", "accept", "application/vnd.huddle.data+json")
         parser.set("API", "huddleApiServer", "http://api.huddle.test/")
-        parser.set("API", "huddleCalandarServer", "http://api.huddle.dev/v2/calendar/workspaces/")
-        parser.set("API", "huddleTaskServer", "http://api.huddle.dev/v2/calendar/events/")
+        parser.set("API", "huddleCalandarServer", "http://api.huddle.dev/v2/calandar/workspaces/")
+        parser.set("API", "huddleTaskServer", "http://api.huddle.dev/v2/calandar/events/")
 
         return parser

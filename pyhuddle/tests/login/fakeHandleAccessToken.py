@@ -1,8 +1,7 @@
 import json
 from pyhuddle.oauth2 import token
-from pyhuddle.oauth2.oauth_api import OAuth
 from pyhuddle.tests.fakeParser import FakeParser
-from pyhuddle.oauth2.handle_access_token import HandleAccessToken
+from pyhuddle.oauth2.handle_access_token import HandleAccessToken, OAuth
 from pyhuddle.tests.httpFakeAdapter import HttpFakeAdapter
 from pyhuddle.tests.login.fakeAuthServer import FakeAuthServer
 
@@ -29,7 +28,7 @@ class FakeHandleAccessToken(HandleAccessToken):
         return token
 
     def createAccessToken(self):
-        response = self.oAuth.obtainAccessToken("123456")
+        response = self.oAuth.obtainAccessTokenBy3LeggedOAuth("123456")
         responseBody = json.loads(response['Body'])
 
         oauthToken = token.Token(responseBody)

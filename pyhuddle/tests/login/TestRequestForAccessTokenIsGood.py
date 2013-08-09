@@ -1,4 +1,4 @@
-from pyhuddle.oauth2.oauth_api import OAuth
+from pyhuddle.oauth2.handle_access_token import OAuth
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.httpFakeAdapter import HttpFakeAdapter
 from pyhuddle.tests.login.fakeAuthServer import FakeAuthServer
@@ -19,7 +19,7 @@ class WhenWeAskServerForAccessToken(unittest.TestCase):
         self.oAuth = OAuth(config, request)
 
     def test_getAccessToken(self):
-        request  = self.oAuth.obtainAccessToken("123456")
+        request  = self.oAuth.obtainAccessTokenBy3LeggedOAuth("123456")
         body = '{"access_token" : "token", "expires_in" : 3600, "refresh_token" : "tokenRefresh"}'
 
         self.assertEqual(request['Headers']['status'], 200)

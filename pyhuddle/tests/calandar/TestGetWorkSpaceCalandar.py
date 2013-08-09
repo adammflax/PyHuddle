@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.calendar.calendar import Calendar
+from pyhuddle.calandar.calandar import Calendar
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.calandar.FakeCalandarServers.fakeCalandarServer import FakeCalandarServer
 from pyhuddle.tests.fakeParser import FakeParser
@@ -25,10 +25,10 @@ class WhenWeGteWorkspaceCalandar(unittest.TestCase):
         self.assertIsInstance(self.result, Calendar)
 
     def test_makeSureWeHaveRightCalandar(self):
-        self.assertEqual("AcceptanceTest", self.result.lazyGet().jsonObj['workspace']['displayName'])
+        self.assertEqual("AcceptanceTest", self.result.metaData.jsonObj['workspace']['displayName'])
 
     def test_makeSureHasRightEvents(self):
-        self.assertEqual(1, len(self.result.lazyGet().jsonObj['events']))
+        self.assertEqual(1, len(self.result.metaData.jsonObj['events']))
 
 
 

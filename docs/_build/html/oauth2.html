@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>OAuth2 &mdash; PyHuddle 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyHuddle 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Calandar" href="calandar.html" />
+    <link rel="prev" title="HttpAdapter" href="httpadapter.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="calandar.html" title="Calandar"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="httpadapter.html" title="HttpAdapter"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="oauth2">
+<h1>OAuth2<a class="headerlink" href="#oauth2" title="Permalink to this headline">¶</a></h1>
+<p>That has a paragraph about a main subject and is set when the &#8216;=&#8217;
+is at least the same length of the title itself.</p>
+<div class="section" id="module-interface">
+<h2>Module Interface<a class="headerlink" href="#module-interface" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="handleaccesstoken">
+<h3>HandleAccessToken<a class="headerlink" href="#handleaccesstoken" title="Permalink to this headline">¶</a></h3>
+<p>class <em>handle_access_token</em>.<strong>HandleAccessToken</strong>()</p>
+<blockquote>
+<div><p>This class is response for retriving access tokens and managing them.</p>
+<dl class="docutils">
+<dt><strong>__init__</strong>(self, adapter, config, createToken=None)</dt>
+<dd><p class="first"><em>Adapter</em> adapter: an instance of the the http adapter we should use</p>
+<p><em>Config</em> config: an instance of the Config class</p>
+<p class="last"><em>Function</em> createToken: an optional function which if used will define the flow for OAuth2 (By default it will do 3 legged OAuth OOB).</p>
+</dd>
+<dt><strong>HandleAccessToken</strong>(self)</dt>
+<dd>returns an access token from memory. If the access token does not exist it will call the createToken function to get it. If the token has expired it will refresh it</dd>
+<dt><strong>RefreshAccessToken</strong>(self)</dt>
+<dd>refreshes an existing access token from memory if we get a good response back from the server the refreshed token is returned.</dd>
+<dt><strong>CreateAccessTokenReplacement</strong>(self)</dt>
+<dd>the default function that is called to get an access token from the server. This will only be called if you do not specify a function to use in the constructor. This function
+returns an access token by performing 3 legged OAuth by out of band.</dd>
+</dl>
+<p>Properties:</p>
+<p><em>Token</em> oauthToken: a token object which stores the access token for the user</p>
+</div></blockquote>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see foo on how to create an adapter.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see  foo on setting up your config file for pyHuddle.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see foo on making a custom createToken function.</p>
+</div>
+</div>
+<div class="section" id="oauth">
+<h3>OAuth<a class="headerlink" href="#oauth" title="Permalink to this headline">¶</a></h3>
+<p>class  <em>handle_access_token</em>.<strong>OAuth</strong>()</p>
+<blockquote>
+<div><p>This class has all the requests needed for oauth2 such as refreshing or getting a token.</p>
+<dl class="docutils">
+<dt><strong>__init__</strong>(self, adapter, config, createToken=None)</dt>
+<dd><p class="first"><em>Adapter</em> adapter: an instance of the the http adapter we should use</p>
+<p><em>Config</em> config: an instance of the Config class</p>
+<p class="last"><em>Function</em> createToken: an optional function which if used will define the flow for OAuth2 (By default it will do 3 legged OAuth OOB).</p>
+</dd>
+<dt><strong>ObtainAccessTokenBy3LeggedOAuth</strong>(self, auth_code)</dt>
+<dd><p class="first"><em>String</em> auth_code : An authorization code used in the 3 legged OAuth process. For details on how to get an authorization code check out how 3 legged oAuth works</p>
+<p class="last">sends a POST request to the server to get an access token by exchanging it for an auth code.</p>
+</dd>
+<dt><strong>RefreshAccessToken</strong>(self, token)</dt>
+<dd><p class="first"><em>Token</em> token: A token object that would of been created in the HandleAccessToken&#8217;s GetAccessToken method</p>
+<p class="last">sends a POST request to the server that exchanges an access token for another access token. We may need to do this as access tokens in Huddle expire every 20 minutes</p>
+</dd>
+</dl>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You should never have to use or worry about this class as it is invoked by the HandleAccessToken Class. It is here for completeness only.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see foo on how to create an adapter.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see  foo on setting up your config file for pyHuddle.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see foo on making a custom createToken function.</p>
+</div>
+</div>
+<div class="section" id="token">
+<h3>Token<a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>class  <em>token</em>.<strong>Token</strong>()</dt>
+<dd><p class="first">This class stores an access tokens and has methods around making retrival of specific data easier.</p>
+<dl class="docutils">
+<dt><strong>__init__</strong>(self, json)</dt>
+<dd><p class="first"><em>Dict(String, String)</em> json: This is the json response that came back from the server after getting an access token. This response needs to be turned into json by using <tt class="docutils literal"><span class="pre">json.loads()</span></tt> The json response should look like this:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="p">{</span>
+   <span class="s">&quot;access_token&quot;</span><span class="p">:</span><span class="s">&quot;S1AV32hkKG&quot;</span><span class="p">,</span>
+   <span class="s">&quot;expires_in&quot;</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span>
+   <span class="s">&quot;refresh_token&quot;</span><span class="p">:</span><span class="s">&quot;8xLOxBtZp8&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>IsExpired</strong>(self)</dt>
+<dd>returns True or False depending on if the token has expired</dd>
+<dt><strong>GetAccessToken</strong>(self)</dt>
+<dd>returns the Access Token as a string</dd>
+<dt><strong>GetRefreshToken</strong>(self)</dt>
+<dd>returns the Refresh Token as a string</dd>
+<dt><strong>GetExpiry</strong>(self)</dt>
+<dd>returns the duration of the access token in seconds</dd>
+</dl>
+<p>Properties:</p>
+<p class="last"><em>String</em> json: the json representation of our access token, refresh token and expires_in</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You should never have to call the getRefreshToken method as this is handled by the HandleAccessToken class. It is here for completeness only.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You should never have to call the getExpiry method as you should be using the isExpiredMethod to check if the token has expired or not. It is here for completeness only.</p>
+</div>
+</div>
+</div>
+<div class="section" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>PyHuddle abstracts most of the OAuth protocol away. Generally all you need to do is initialize the HandleAccessToken class and parse it into the HuddleClient object. This is because PyHuddle will do the rest for you. This can be seen below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">tokenHandler</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>       <span class="c">#get our token</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
+</pre></div>
+</div>
+<p>Sometimes you may want to change the OAuth flow to get an access token. This will mostly be done in systems in which it is unsuitable for the user to paste in an auth code into the application such as websites. Check out
+the tutorial page on how to do this.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see  foo on setting up your config file for pyHuddle.</p>
+</div>
+</div>
+<div class="section" id="create-your-own-way-to-get-an-access-token">
+<h3>Create your own way to get an access token<a class="headerlink" href="#create-your-own-way-to-get-an-access-token" title="Permalink to this headline">¶</a></h3>
+<p>By default the HandleAccessToken object will attempt to perform 3 legged OAuth by OOB. If you wish to change how the OAuth Flow works you can parse in your own function to the constructor of this object. In this tutorial we will
+change the flow by getting an access token with a password profile rather then by using 3 legged OAuth.</p>
+<dl class="docutils">
+<dt>This request is done by sending a POST request to Huddles server which contains:</dt>
+<dd><ul class="first last simple">
+<li>your clientId</li>
+<li>your client Secret</li>
+<li>your username</li>
+<li>your password</li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-python"><pre>def createAccessTokenReplacement(self):
+        header = {&#x27;Accept&#x27;: &#x27;application/json&#x27;, &#x27;Content-Type&#x27;: &#x27;application/x-www-form-urlencoded&#x27;}
+        url = self._config[&#x27;OAUTH2ENDPOINT&#x27;][&#x27;huddleAccessTokenServer&#x27;]
+
+        body = {&quot;grant_type&quot;: &quot;password&quot;,
+                        &quot;client_id&quot;: self._config[&#x27;OAUTH2&#x27;][&#x27;clientID&#x27;],
+                        &quot;redirect_uri&quot;: self._config[&#x27;OAUTH2&#x27;][&#x27;redirectUri&#x27;],
+                        &quot;username&quot;: self._config[&#x27;OAUTH2&#x27;][&#x27;username&#x27;],
+                        &quot;password&quot; : self._config[&#x27;OAUTH2&#x27;][&#x27;password]}
+
+        response  = self._request.postRequest(url, header, parse.urlencode(body))
+        responseBody = json.loads(response[&#x27;Body&#x27;])
+
+        try:
+                oauthToken = Token(responseBody)
+        except TypeError as e:
+                print (&quot;Bad response when requesting a token &quot; + str(response))
+                sys.exit()
+
+        return oauthToken</pre>
+</div>
+<p>In the first part of our function we simply perform a post request to the server with those details url encoded. If everything goes well the server should respond with a JSON response that looks like:</p>
+<div class="highlight-python"><pre>HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: no-store
+
+{
+   &quot;access_token&quot;:&quot;S1AV32hkKG&quot;,
+   &quot;expires_in&quot;:300,
+   &quot;refresh_token&quot;:&quot;8xLOxBtZp8&quot;
+}</pre>
+</div>
+<p>Finally we try and parse that json response into our token object which we then return. Please note that it is expected that this function returns a token object</p>
+<p>So if we want to use this new function rather then OOB we call the HandleAccessTokenObject like this</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">token</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">createToken</span><span class="o">=</span><span class="n">createAccessTokenReplacement</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OAuth2</a><ul>
+<li><a class="reference internal" href="#module-interface">Module Interface</a><ul>
+<li><a class="reference internal" href="#handleaccesstoken">HandleAccessToken</a></li>
+<li><a class="reference internal" href="#oauth">OAuth</a></li>
+<li><a class="reference internal" href="#token">Token</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorials">Tutorials</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#create-your-own-way-to-get-an-access-token">Create your own way to get an access token</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="httpadapter.html"
+                        title="previous chapter">HttpAdapter</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="calandar.html"
+                        title="next chapter">Calandar</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/oauth2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="calandar.html" title="Calandar"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="httpadapter.html" title="HttpAdapter"
+             >previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Adam Flax.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

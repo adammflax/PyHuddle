@@ -1,6 +1,6 @@
 import io
 import unittest
-from pyhuddle.api.create_mutipart_form_request import MultiPartFormRequest
+from pyhuddle.api.create_multipart_form_request import MultiPartFormRequest
 from pyhuddle.tests.document.fakeFile import FakeFile
 
 __author__ = 'adam.flax'

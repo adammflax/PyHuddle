@@ -27,7 +27,7 @@ class AdapterHttpUrlLib(Adapter):
 
         response  = {"Headers" : CaselessDictionary(newHeader), "Body" : newBody}
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
         return response
 
     def deleteRequest(self, url, header):
@@ -43,17 +43,17 @@ class AdapterHttpUrlLib(Adapter):
 
         response  = {"Headers" : CaselessDictionary(newHeader), "Body" : newBody}
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
         return response
 
-    def postRequest(self, url, header, body):
+    def postRequest(self, url, header, data):
         """
         implementation of a post request
         """
 
-        body = body.encode('utf-8')
+        data = data.encode('utf-8')
 
-        req = urllib.request.Request(url, data=body, headers=header)
+        req = urllib.request.Request(url, data=data, headers=header)
         f = urllib.request.urlopen(req)
 
         newBody = f.read().decode('utf-8')
@@ -62,18 +62,18 @@ class AdapterHttpUrlLib(Adapter):
 
         response  = {"Headers" : CaselessDictionary(newHeader), "Body" : newBody}
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
         return response
 
 
-    def putRequest(self, url, header, body):
+    def putRequest(self, url, header, data):
         """
         implementation of a PUT request
         """
 
-        body = body.encode('utf-8')
+        data = data.encode('utf-8')
 
-        req = urllib.request.Request(url, data=body, headers=header, method='PUT')
+        req = urllib.request.Request(url, data=data, headers=header, method='PUT')
 
         f = urllib.request.urlopen(req)
 
@@ -83,5 +83,5 @@ class AdapterHttpUrlLib(Adapter):
 
         response  = {"Headers" : CaselessDictionary(newHeader), "Body" : newBody}
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
         return response

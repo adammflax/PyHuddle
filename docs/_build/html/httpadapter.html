@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>HttpAdapter &mdash; PyHuddle 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyHuddle 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="OAuth2" href="oauth2.html" />
+    <link rel="prev" title="Api" href="api.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="oauth2.html" title="OAuth2"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Api"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="httpadapter">
+<h1>HttpAdapter<a class="headerlink" href="#httpadapter" title="Permalink to this headline">¶</a></h1>
+<p>That has a paragraph about a main subject and is set when the &#8216;=&#8217;
+is at least the same length of the title itself.</p>
+<div class="section" id="module-interface">
+<h2>Module Interface<a class="headerlink" href="#module-interface" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adapter">
+<h3>Adapter<a class="headerlink" href="#adapter" title="Permalink to this headline">¶</a></h3>
+<p>class <em>adapter</em>.<strong>Adapter</strong>()</p>
+<blockquote>
+<div><p>This class is used as adapter for HTTP libraries. Look at the wrapper/adapter pattern for more information. By using an adapter we can allow developers to use any library the wish</p>
+<dl class="docutils">
+<dt><strong>GetRequest</strong>(self, url, header)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p class="last">sends a GET request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+<dt><strong>DeleteRequest</strong>(self, url, header)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p class="last">sends a DELETE request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+<dt><strong>PostRequest</strong>(self, url, header, data)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p><em>String</em> data: the data to send to the request</p>
+<p class="last">sends a POST request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+<dt><strong>PutRequest</strong>(self, url, header, data)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p><em>String</em> data: the data to send to the request</p>
+<p class="last">sends a PUT request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+</dl>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This class does not have an implementation. Its only use is to be inheritied by other adapters to make sure they have the methods needed</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see  foo on creating your own adapter</p>
+</div>
+</div>
+<div class="section" id="caseless-dictionary">
+<h3>Caseless_Dictionary<a class="headerlink" href="#caseless-dictionary" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>class <em>caseless_dictionary</em>.<strong>CaselessDictionary</strong>()</dt>
+<dd>This class is a wrapper around pythons <tt class="docutils literal"><span class="pre">dictionary</span></tt> class. This class can perform the same operations as a normal dictionary. The only difference between this and the <tt class="docutils literal"><span class="pre">dictionary</span></tt> class is that when it comes to retrieval keys are case insensitive.
+The reason for this class is that according to the HTTP specification headers are case insensitive so we can never be sure what case the headers we get will be like.</dd>
+</dl>
+</div>
+<div class="section" id="adapter-urllib">
+<h3>Adapter_Urllib<a class="headerlink" href="#adapter-urllib" title="Permalink to this headline">¶</a></h3>
+<p>class <em>adapter_urllib</em>.<strong>AdapterHttpUrlLib</strong>(Adapter)</p>
+<blockquote>
+<div><p>This class is an adapter implementation for the urllib3 library</p>
+<dl class="docutils">
+<dt><strong>GetRequest</strong>(self, url, header)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p class="last">sends a GET request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+<dt><strong>DeleteRequest</strong>(self, url, header)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p class="last">sends a DELETE request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+<dt><strong>PostRequest</strong>(self, url, header, data)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p><em>String</em> data: the data to send to the request</p>
+<p class="last">sends a POST request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+<dt><strong>PutRequest</strong>(self, url, header, data)</dt>
+<dd><p class="first"><em>String</em> url: The url for the request to get sent to</p>
+<p><em>Dict(String, String)</em> header: The headers for the HTTP request</p>
+<p><em>String</em> data: the data to send to the request</p>
+<p class="last">sends a PUT request to the server returns the response as a {Headers : CaselessDict&lt;String, String&gt;, String : Body&gt;</p>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-your-own-adapter">
+<h3>Create your own adapter<a class="headerlink" href="#create-your-own-adapter" title="Permalink to this headline">¶</a></h3>
+<p>PyHuddle has been developed in a way which allows you to use any http library with it. In this tutorial we will create a new adapter using the httplib2 library.</p>
+<p>Your adapter must have the following methods inside it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">getRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;Unimplemented abstract method&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">deleteRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;Unimplemented abstract method&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">postRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;Unimplemented abstract method&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">putRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s">&quot;Unimplemented abstract method&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Your adapter must perform the following tasks.</p>
+<blockquote>
+<div><ul class="simple">
+<li>It must send the given request to the server. You should expect to deal with the following arguments &lt;string&gt; url, &lt;Caseless Dictionary&gt; headers, &lt;string&gt; body</li>
+<li>It must create a response key value object of {&#8220;Headers&#8221; :&lt;Caseless Dictionary&gt;Headers, &#8220;Body&#8221; : &lt;String&gt;response}</li>
+<li>It <strong>should</strong> cache the responses</li>
+<li>Your adapter must then parse the response to the HuddleErrors Object. This objects responseability is to generate an error if we get an error code back from the server. This is important as some of the api requests will look out for particular errors. For instance if we upload a new version of a document we lock the existing document first. If the lock fails we should expect to see a HuddleConflictError being thrown.</li>
+<li>It should then return the response key value</li>
+</ul>
+</div></blockquote>
+<p>The responses we get back server are going to be different depending on the request. However you should expect to have to deal with the following headers.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Content-Type</td>
+<td>The specific content type of the response.</td>
+</tr>
+<tr class="row-odd"><td>Status</td>
+<td>The status code returned by the response</td>
+</tr>
+<tr class="row-even"><td>Last-Modified</td>
+<td>The last modified time of the resource.</td>
+</tr>
+<tr class="row-odd"><td>Link</td>
+<td>Signals a related resource or operation.</td>
+</tr>
+<tr class="row-even"><td>Location</td>
+<td>The URI that the new resource can be found at.</td>
+</tr>
+</tbody>
+</table>
+<p>Bearing all of this in mind we can now right our adapter for the HttpLib2 adapter:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">adapterHttpLib2</span><span class="p">(</span><span class="n">Adapter</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_huddleErrors</span> <span class="o">=</span> <span class="n">HandleCodeResponse</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">getRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">httplib2</span><span class="o">.</span><span class="n">Http</span><span class="p">(</span><span class="s">&quot;.cache&quot;</span><span class="p">)</span> <span class="c">#allows us to cache our responses</span>
+                <span class="n">head</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span> <span class="c">#get our headers and body data from the servers response</span>
+
+                <span class="n">response</span> <span class="o">=</span>  <span class="p">{</span><span class="s">&quot;Headers&quot;</span> <span class="p">:</span> <span class="n">CaselessDictionary</span><span class="p">(</span><span class="n">head</span><span class="p">),</span> <span class="s">&quot;Body&quot;</span> <span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)}</span> <span class="c">#parse our response data into the format PyHuddle Expects to see</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_huddleErrors</span><span class="o">.</span><span class="n">CheckForErrors</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="c">#check for errors</span>
+                <span class="k">return</span> <span class="n">response</span>
+
+        <span class="k">def</span> <span class="nf">deleteRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">):</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">httplib2</span><span class="o">.</span><span class="n">Http</span><span class="p">(</span><span class="s">&quot;.cache&quot;</span><span class="p">)</span> <span class="c">#allows us to cache our responses</span>
+                <span class="n">head</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span> <span class="c">#get our headers and body data from the servers response</span>
+
+                <span class="n">response</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Headers&quot;</span> <span class="p">:</span> <span class="n">CaselessDictionary</span><span class="p">(</span><span class="n">head</span><span class="p">),</span> <span class="s">&quot;Body&quot;</span> <span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)}</span> <span class="c">#parse our response data into the format PyHuddle Expects to see</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_huddleErrors</span><span class="o">.</span><span class="n">CheckForErrors</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="c">#check for errors</span>
+                <span class="k">return</span> <span class="n">response</span>
+
+        <span class="k">def</span> <span class="nf">postRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">httplib2</span><span class="o">.</span><span class="n">Http</span><span class="p">(</span><span class="s">&quot;.cache&quot;</span><span class="p">)</span> <span class="c">#allows us to cache our responses</span>
+                <span class="n">head</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;POST&quot;</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span> <span class="c">#get our headers and body data from the servers response</span>
+
+                <span class="n">response</span>  <span class="o">=</span> <span class="p">{</span><span class="s">&quot;Headers&quot;</span> <span class="p">:</span> <span class="n">CaselessDictionary</span><span class="p">(</span><span class="n">head</span><span class="p">),</span> <span class="s">&quot;Body&quot;</span> <span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)}</span> <span class="c">#parse our response data into the format PyHuddle Expects to see</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_huddleErrors</span><span class="o">.</span><span class="n">CheckForErrors</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="c">#check for errors</span>
+                <span class="k">return</span> <span class="n">response</span>
+
+
+        <span class="k">def</span> <span class="nf">putRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+                <span class="n">h</span> <span class="o">=</span> <span class="n">httplib2</span><span class="o">.</span><span class="n">Http</span><span class="p">(</span><span class="s">&quot;.cache&quot;</span><span class="p">)</span> <span class="c">#allows us to cache our responses</span>
+                <span class="n">head</span><span class="p">,</span> <span class="n">body</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span> <span class="c">#get our headers and body data from the servers response</span>
+
+                <span class="n">response</span> <span class="o">=</span>  <span class="p">{</span><span class="s">&quot;Headers&quot;</span> <span class="p">:</span> <span class="n">CaselessDictionary</span><span class="p">(</span><span class="n">head</span><span class="p">),</span> <span class="s">&quot;Body&quot;</span> <span class="p">:</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">)}</span> <span class="c">#parse our response data into the format PyHuddle Expects to see</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_huddleErrors</span><span class="o">.</span><span class="n">CheckForErrors</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="c">#check for errors</span>
+                <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">HttpAdapter</a><ul>
+<li><a class="reference internal" href="#module-interface">Module Interface</a><ul>
+<li><a class="reference internal" href="#adapter">Adapter</a></li>
+<li><a class="reference internal" href="#caseless-dictionary">Caseless_Dictionary</a></li>
+<li><a class="reference internal" href="#adapter-urllib">Adapter_Urllib</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#create-your-own-adapter">Create your own adapter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="previous chapter">Api</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="oauth2.html"
+                        title="next chapter">OAuth2</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/httpadapter.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="oauth2.html" title="OAuth2"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="api.html" title="Api"
+             >previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Adam Flax.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

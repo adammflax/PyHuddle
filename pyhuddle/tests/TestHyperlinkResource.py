@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.hyperlink_resource import HyperLinkResource
+from pyhuddle.api.resource import HyperLinkResource
 
 __author__ = 'adam.flax'
 

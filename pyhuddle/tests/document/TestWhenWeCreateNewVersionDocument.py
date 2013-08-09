@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Document
+from pyhuddle.files.files import Document
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.document.FakeDocumentServers.fakeDocumentNewVersion import FakeDocumentNewVersion
 from pyhuddle.tests.document.fakeFile import FakeFile
@@ -27,10 +27,10 @@ class WhenWeCreateANewVersionOfTheDocument(unittest.TestCase):
         self.assertIsInstance(self.result, Document)
 
     def test_makeSureWeGetBackRightDocumentTitle(self):
-        self.assertEqual("foo", self.result.lazyGet().getTitle())
+        self.assertEqual("foo", self.result.metaData.getTitle())
 
     def test_makeSureWeGetBackRightDocumentDescription(self):
-        self.assertEqual("bar", self.result.lazyGet().getDescription())
+        self.assertEqual("bar", self.result.metaData.getDescription())
 
 if __name__ == '__main__':
     unittest.main()

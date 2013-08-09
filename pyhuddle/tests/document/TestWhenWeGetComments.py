@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Document
+from pyhuddle.files.files import Document
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.document.FakeDocumentServers.fakeDocumentComments import FakeDocumentComments
 from pyhuddle.tests.fakeParser import FakeParser

@@ -13,7 +13,7 @@ The library expects the http layer to check for normal status code errors, do th
 the huddleErrors.handleResponseError class
 """
 
-class Adapter(object):
+class Adapter():
     def getRequest(self, url, header):
         """
         The url should be type string
@@ -21,7 +21,7 @@ class Adapter(object):
         """
         raise NotImplementedError("Unimplemented abstract method")
 
-    def postRequest(self, url, header, body):
+    def postRequest(self, url, header, data):
         """
         The url should be type string
         you should expect the headers to be type dict {"Content:type" : "value", "Accept" : "value"}
@@ -36,7 +36,7 @@ class Adapter(object):
         """
         raise NotImplementedError("Unimplemented abstract method")
 
-    def putRequest(self, url, header):
+    def putRequest(self, url, header, data):
         """
         The url should be type string
         you should expect the headers to be type dict {"Content:type" : "value", "Accept" : "value"}

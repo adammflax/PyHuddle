@@ -1,7 +1,7 @@
 
 import unittest
-from pyhuddle.api.calendar.calendar import Calendar
-from pyhuddle.api.tasks.tasks import Task
+from pyhuddle.calandar.calandar import Calendar
+from pyhuddle.tasks.tasks import Task
 from pyhuddle.tests.httpFakeAdapter import HttpFakeAdapter
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.api.huddle_client import HuddleClient
@@ -28,7 +28,7 @@ class WhenWCreateTask(unittest.TestCase):
         self.assertIsInstance(self.result, Task)
 
     def test_makeSureWeHaveRightTask(self):
-        self.assertEqual("http://api.huddle.dev/v2/calendar/events/18279", self.result.selfLink)
+        self.assertEqual("http://api.huddle.dev/v2/calandar/events/18279", self.result.selfLink)
 
 if __name__ == '__main__':
     unittest.main()

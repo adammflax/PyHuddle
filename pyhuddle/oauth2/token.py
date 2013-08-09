@@ -17,13 +17,13 @@ class Token(object):
             raise TypeError("The json is not in a valid form of a token as it does not contain an refresh_token")
 
         self.json = json
-        self.expiryTime = datetime.now() + timedelta(seconds=self.getExpiry())
+        self._expiryTime = datetime.now() + timedelta(seconds=self.getExpiry())
 
     def isExpired(self):
         """
         returns true if the token has expired. Otherwise it will return false
         """
-        return True if (datetime.now() > self.expiryTime) else False
+        return True if (datetime.now() > self._expiryTime) else False
 
     def getAccessToken(self):
         return self.json.get('access_token')

@@ -10,7 +10,7 @@ class FakeCalandarTaskCreateServer(FakeCalandarServer):
         if url == "http://api.huddle.test/entry":
             return FakeAuthServer().goodResponse
 
-        if url != "http://api.huddle.dev/v2/calendar/events/18279":
+        if url != "http://api.huddle.dev/v2/calandar/events/18279":
             return self.badResponse("404")
 
         newResponse = self.goodResponse.copy()
@@ -36,7 +36,7 @@ class FakeCalandarTaskCreateServer(FakeCalandarServer):
 
         newResponse = self.goodResponse.copy()
         newResponse['Headers']['status'] = 201
-        newResponse['Headers']['location'] = 'http://api.huddle.dev/v2/calendar/events/18279'
+        newResponse['Headers']['location'] = 'http://api.huddle.dev/v2/calandar/events/18279'
         newResponse['Body'] = self.validTask()
 
         return newResponse
@@ -80,6 +80,6 @@ class FakeCalandarTaskCreateServer(FakeCalandarServer):
     "id": 18279,
     "title": "foo",
     "description": "bar",
-    "uri": "http://api.huddle.dev/v2/calendar/events/18279"
+    "uri": "http://api.huddle.dev/v2/calandar/events/18279"
 }
                 """

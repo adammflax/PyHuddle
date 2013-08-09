@@ -1,10 +1,10 @@
 import re
-from .hyperlink_resource import HyperLinkResource
-from .user.user import User
-from .files.files import WorkSpace
+from pyhuddle.api.resource import HyperLinkResource
+from pyhuddle.files.files import WorkSpace
+from pyhuddle.user.user import User
 
 __author__ = 'adam.flax'
-class HuddleClient(object):
+class HuddleClient():
 
     def __init__(self, token, adapter, config):
         self.token = token
@@ -17,9 +17,10 @@ class HuddleClient(object):
         if not hasattr(self.adapter, "deleteRequest"): raise TypeError("Your adapter does not have a delete method!")
 
         self._metaData = None
-        self.user = User(self, self.lazyGet().selfLink)
+        self.user = User(self, self.metaData.selfLink)
 
-    def lazyGet(self):
+    @property
+    def metaData(self):
         if self._metaData is None:
             #lets hit entry
             url = self.config['API']['huddleApiServer'] + "entry"
@@ -42,7 +43,7 @@ class HuddleClient(object):
         workspaces = []
 
         try:
-            for workspace in self.lazyGet().jsonObj['membership']['workspaces']:
+            for workspace in self.metaData.jsonObj['membership']['workspaces']:
                 ws = HyperLinkResource(workspace)
                 workspaces.append(WorkSpace(self, ws.selfLink))
         except KeyError:

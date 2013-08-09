@@ -1,6 +1,6 @@
 import unittest
 import json
-from pyhuddle.oauth2.oauth_api import OAuth
+from pyhuddle.oauth2.handle_access_token import OAuth
 from pyhuddle.oauth2.token import Token
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.httpFakeAdapter import HttpFakeAdapter

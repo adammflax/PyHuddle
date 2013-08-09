@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Document
+from pyhuddle.files.files import Document
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.document.FakeDocumentServers.fakeDocumentUpdate import FakeDocumentUpdate
 from pyhuddle.tests.fakeParser import FakeParser
@@ -25,10 +25,10 @@ class WhenWeUpdateADocument(unittest.TestCase):
         self.assertIsInstance(self.result, Document)
 
     def test_makeSureWeGetBackRightDocumentTitle(self):
-        self.assertEqual(self.result.lazyGet().getTitle(), "foo")
+        self.assertEqual(self.result.metaData.getTitle(), "foo")
 
     def test_makeSureWeGetBackRightDocumentDescription(self):
-        self.assertEqual(self.result.lazyGet().getDescription(), "bar")
+        self.assertEqual(self.result.metaData.getDescription(), "bar")
 
 if __name__ == '__main__':
     unittest.main()

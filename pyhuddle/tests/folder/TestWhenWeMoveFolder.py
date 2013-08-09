@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Folder
+from pyhuddle.files.files import Folder
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.folder.FakeFolderServers.fakeFolderMove import FakeFolderMove
@@ -23,7 +23,7 @@ class WhenWeMoveFolder(unittest.TestCase):
         self.result = self.folder.moveTo(self.folderB)
 
     def test_makeSureWeGetValidParent(self):
-        self.assertEqual(self.result.lazyGet().getLink("parent"), "newUrl")
+        self.assertEqual(self.result.metaData.getLink("parent"), "newUrl")
 
     def test_makeSureWeGetBackAFolder(self):
         self.assertIsInstance(self.result, Folder)

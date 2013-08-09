@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Document
+from pyhuddle.files.files import Document
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.document.FakeDocumentServers.fakeDocumentRestore import FakeDocumentRestore
 from pyhuddle.tests.fakeParser import FakeParser
@@ -19,17 +19,17 @@ class WhenWeRestoreADocument(unittest.TestCase):
 
         self.client = HuddleClient(handleAccessToken, request, config)
         self.document = Document(self.client, "IAmAFakeUrl")
-        self.document.lazyGet().graveyard.append(self.document) #add to the graveyard
+        self.document.metaData.graveyard.append(self.document) #add to the graveyard
         self.result = self.document.restore()
 
     def test_makeSureWeGetBackADocument(self):
         self.assertIsInstance(self.result, Document)
 
     def test_makeSureWeGetBackRightDocument(self):
-        self.assertEqual(self.result.lazyGet().getTitle(), "I Am a test")
+        self.assertEqual(self.result.metaData.getTitle(), "I Am a test")
 
     def test_makeSureGraveyardHaBeenDecreased(self):
-        self.assertEqual(len(self.document.lazyGet().graveyard), 0)
+        self.assertEqual(len(self.document.metaData.graveyard), 0)
 
 if __name__ == '__main__':
     unittest.main()

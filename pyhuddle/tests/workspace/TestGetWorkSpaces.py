@@ -20,10 +20,10 @@ class WhenWeGetWorkspaces(unittest.TestCase):
         self.assertEqual(len(self.client.getWorkSpaces()), 8)
 
     def test_makeSureWeHaveDocumentLibraryLink(self):
-        self.assertEqual(self.client.getWorkSpaces()[0].lazyGet().getLink("documentLibrary"), "http://api.huddle.dev/files/folders/2227259")
+        self.assertEqual(self.client.getWorkSpaces()[0].metaData.getLink("documentLibrary"), "http://api.huddle.dev/files/folders/2227259")
 
     def test_makeSureWeHaveTitleOfAcceptanceTest(self):
-        self.assertEqual(self.client.getWorkSpaces()[0].lazyGet().getTitle(), "AcceptanceTest")
+        self.assertEqual(self.client.getWorkSpaces()[0].metaData.getTitle(), "AcceptanceTest")
 
 if __name__ == '__main__':
     unittest.main()

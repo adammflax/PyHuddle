@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Document, Folder
+from pyhuddle.files.files import Document, Folder
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.document.FakeDocumentServers.fakeDocumentMove import FakeDocumentMove
 from pyhuddle.tests.fakeParser import FakeParser
@@ -23,7 +23,7 @@ class WhenWeMoveADocument(unittest.TestCase):
         self.result = self.document.moveTo(self.folder)
 
     def test_makeSureWeGetBackAValidParent(self):
-        self.assertNotEqual(self.result.lazyGet().getLink("parent"), self.document.lazyGet().getLink("parent"))
+        self.assertNotEqual(self.result.metaData.getLink("parent"), self.document.metaData.getLink("parent"))
 
     def test_makeSureWeGetBackADocument(self):
         self.assertIsInstance(self.result, Document)

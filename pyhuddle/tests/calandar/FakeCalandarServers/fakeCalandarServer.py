@@ -12,7 +12,7 @@ class FakeCalandarServer(FakeWorkspaceServer):
         if url == "http://api.huddle.dev/workspaces/1237967":
             return self.goodResponse
 
-        if url != "http://api.huddle.dev/v2/calendar/workspaces/1237967":
+        if url != "http://api.huddle.dev/v2/calandar/workspaces/1237967":
             return self.badResponse("404")
 
         newResponse = self.goodResponse.copy()
@@ -23,7 +23,7 @@ class FakeCalandarServer(FakeWorkspaceServer):
     def validCalandar(self):
         return """
       {
-    "uri": "http://api.huddle.dev/v2/calendar/workspaces/2227254",
+    "uri": "http://api.huddle.dev/v2/calandar/workspaces/2227254",
     "workspace": {
         "id": 2227254,
         "uri": "http://api.huddle.dev/workspaces/2227254",
@@ -71,7 +71,7 @@ class FakeCalandarServer(FakeWorkspaceServer):
         "id": 18269,
         "title": "Blow up London",
         "description": "",
-        "uri": "http://api.huddle.dev/v2/calendar/tasks/18269"
+        "uri": "http://api.huddle.dev/v2/calandar/tasks/18269"
     } ]
 }
                 """

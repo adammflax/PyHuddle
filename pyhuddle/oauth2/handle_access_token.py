@@ -1,33 +1,34 @@
 import json
 import sys
+from urllib import parse
 import webbrowser
 from . import  token
-from pyhuddle.oauth2.oauth_api import OAuth
+from pyhuddle.oauth2.token import Token
 
 
 class HandleAccessToken(object):
 
-    def __init__(self, request, config, createToken=None):
+    def __init__(self, adapter, config, createToken=None):
         """
         If you want to write your own createAccesstoken method (i.e you are not using OOB
         You can do so by chucking your function as an optional parameter e.g.
         (self,request, config, createToken=function())
         """
-        self.request = request
+        self._adapter = adapter
         self.oauthToken = None
 
         #make sure their request implementation matches our adapter
-        if not hasattr(request, "getRequest"):
+        if not hasattr(adapter, "getRequest"):
             raise TypeError("Your http request implementation is missing the getRequest method")
-        if not hasattr(request, "postRequest"):
+        if not hasattr(adapter, "postRequest"):
             raise TypeError("Your http request implementation is missing the postRequest method")
-        if not hasattr(request, "deleteRequest"):
+        if not hasattr(adapter, "deleteRequest"):
              raise TypeError("Your http request implementation is missing the deleteRequest method")
-        if not hasattr(request, "putRequest"):
+        if not hasattr(adapter, "putRequest"):
                raise TypeError("Your http request implementation is missing the putRequest method")
 
         self._config = config
-        self._oauth = OAuth(config, self.request)
+        self._oauth = OAuth(config, self._adapter)
 
         if createToken is not None:
             self.createAccessToken = createToken
@@ -76,11 +77,11 @@ class HandleAccessToken(object):
         webbrowser.open_new(url)
         code = input('Please enter the code from your web browser:')
 
-        response = self._oauth.obtainAccessToken(code)
+        response = self._oauth.obtainAccessTokenBy3LeggedOAuth(code)
         responseBody = json.loads(response['Body'])
 
         try:
-            oauthToken = token.Token(responseBody)
+            oauthToken = Token(responseBody)
         except TypeError as e:
             print ("Bad response when requesting a token " + str(response))
             sys.exit()
@@ -117,7 +118,40 @@ class HandleAccessToken(object):
 
         return oauthToken
 
+class OAuth():
 
+    def __init__(self, config, adapter):
+        self._config = config
+        self._adapter = adapter
 
+    def obtainAccessTokenBy3LeggedOAuth(self, auth_code):
+        """
+        Makes a POST request to huddle asking for a access token
+        For instructions on how to do this look here https://code.google.com/p/huddle-apis/wiki/OauthIntegration#Obtaining_Access_and_Refresh_Tokens
+        This method will return the body response this may ever be the new token or the error response
+        """
+        header = {'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
+        url = self._config['OAUTH2ENDPOINT']['huddleAccessTokenServer']
 
+        body = {"grant_type": "authorization_code",
+                "client_id": self._config['OAUTH2']['clientID'],
+                "redirect_uri": self._config['OAUTH2']['redirectUri'],
+                "code": auth_code}
 
+        return self._adapter.postRequest(url, header, parse.urlencode(body))
+
+    def refreshAccessToken(self, token):
+        """
+        Makes a POST request to huddle asking to refresh an old access token
+        For instructions on how to do this look here https://code.google.com/p/huddle-apis/wiki/OauthIntegration#Obtaining_Access_and_Refresh_Tokens
+        This method will return the body response this may ever be the new token or the error response
+        """
+        header = {'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded'}
+        url = self._config['OAUTH2ENDPOINT']['huddleAccessTokenServer']
+
+        body = {"grant_type": "refresh_token",
+                "client_id": self._config['OAUTH2']['clientID'],
+                "refresh_token": token.getRefreshToken()
+        }
+
+        return self._adapter.postRequest(url, header, parse.urlencode(body))

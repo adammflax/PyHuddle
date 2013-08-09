@@ -1,4 +1,4 @@
-from .hyperlink_resource import HyperLinkResource
+from pyhuddle.api.resource import HyperLinkResource
 
 __author__ = 'adam.flax'
 
@@ -24,7 +24,8 @@ class Api(object):
                                                                              "have a getUrlFromHeaderLink attribute")
         assert self.selfLink is not None
 
-    def lazyGet(self):
+    @property
+    def metaData(self):
         """
         We do not want to perform a GET request about the object until we need to. As a lot of objects can get created
         when we perform some methods like getFolders and you may not need them all. For this reason when you want to get

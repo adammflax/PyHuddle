@@ -1,6 +1,6 @@
 import unittest
 from pyhuddle.api.huddle_errors import HuddleConflictError
-from pyhuddle.api.files.files import Folder
+from pyhuddle.files.files import Folder
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.folder.FakeFolderServers.fakeFolderCreate import FakeFolderCreate

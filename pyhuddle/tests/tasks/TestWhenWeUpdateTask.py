@@ -1,6 +1,6 @@
 import unittest
 from pyhuddle.api.huddle_client import HuddleClient
-from pyhuddle.api.tasks.tasks import Task
+from pyhuddle.tasks.tasks import Task
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.httpFakeAdapter import HttpFakeAdapter
 from pyhuddle.tests.login.fakeHandleAccessToken import FakeHandleAccessToken
@@ -20,7 +20,7 @@ class WhenWeUpdateATask(unittest.TestCase):
         self.result = self.task.edit(title="newTitle")
 
     def test_makeSureWeHaveNewName(self):
-        self.assertEqual("newTitle", self.result.lazyGet().getTitle())
+        self.assertEqual("newTitle", self.result.metaData.getTitle())
 
 if __name__ == '__main__':
     unittest.main()

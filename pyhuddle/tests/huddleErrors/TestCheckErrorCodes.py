@@ -41,7 +41,7 @@ class WhenWeHandleHttpResponseToCheckForStatusCode(unittest.TestCase):
 
     def makeRequest(self, code):
         request = {"Headers" : {"status" : code}, "Body" : {"I Am A Body"}}
-        self.code.handleResponseError(request)
+        self.code.CheckForErrors(request)
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Calandar &mdash; PyHuddle 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyHuddle 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Comments" href="comments.html" />
+    <link rel="prev" title="OAuth2" href="oauth2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="comments.html" title="Comments"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="oauth2.html" title="OAuth2"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="calandar">
+<h1>Calandar<a class="headerlink" href="#calandar" title="Permalink to this headline">¶</a></h1>
+<p>That has a paragraph about a main subject and is set when the &#8216;=&#8217;
+is at least the same length of the title itself.</p>
+<div class="section" id="module-interface">
+<h2>Module Interface<a class="headerlink" href="#module-interface" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Calandar<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>class <em>calandar</em>.<strong>Calandar</strong>(api.Api)</dt>
+<dd><p class="first">An api class for performing operations with Huddle calandars</p>
+<dl class="docutils">
+<dt><strong>__init__</strong>(self, client, calandarLink)</dt>
+<dd><p class="first"><em>HuddleClient</em> client: An instance of the HuddleClient class</p>
+<p class="last"><em>String</em> link: a URI pointing to our calandar resource</p>
+</dd>
+<dt><strong>refresh</strong>()</dt>
+<dd>as all api objects are immutable they will not update. If for some reason you wish to force it to update you can do so by calling the refresh method. This will return a Calandar object of the resource but with
+updated meta data.</dd>
+<dt><strong>getTasks</strong>()</dt>
+<dd>returns a list of tasks (as Task objects) for all tasks in the calandar</dd>
+</dl>
+<p><strong>createTask</strong>(self, title, description=None, status=&#8221;NotStarted&#8221;, plannedStartDate=None, completedDate=None, completedBy=None, updatedDate=None, attachments=[]):</p>
+<blockquote class="last">
+<div><p><em>String</em> title: The title of the task, this is the only mandatory field</p>
+<p><em>String</em> description: The description of the task</p>
+<p><em>String</em> status: the status of the task it can be 1 of the following values:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>NotStarted</td>
+<td>The task has yet to start</td>
+</tr>
+<tr class="row-odd"><td>InProgress</td>
+<td>The task is in progress</td>
+</tr>
+<tr class="row-even"><td>Complete</td>
+<td>The task has been complete</td>
+</tr>
+</tbody>
+</table>
+<p><em>String</em> plannedStartDate: The planned start date. This should be in this format %Y-%m-%dT%H:%M:%S</p>
+<p><em>String</em> completeDate: The date the task was completed by. This should be in this format %Y-%m-%dT%H:%M:%S</p>
+<p><em>String</em> completedBy: The user summary of the user who marked the task as complete. This should be in this format %Y-%m-%dT%H:%M:%S</p>
+<p><em>String</em> updatedBy: The date the task was last updated on. This should be in this format %Y-%m-%dT%H:%M:%S</p>
+<p><em>Documents</em> attachments: a list of document objects to attach to the task</p>
+<p>creates a task and if it succeeds, returns a task object</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you create a task and call <tt class="docutils literal"><span class="pre">GetTasks()</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">see  foo on the document api to find out how to get documents to attach to the task</p>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="get-a-list-of-all-tasks">
+<h3>Get a list of all tasks<a class="headerlink" href="#get-a-list-of-all-tasks" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s">&quot;config.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span>    <span class="c">#grab our config info</span>
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HttpAdapterHttpUrlLib</span><span class="p">()</span>       <span class="c">#pick a http library to use</span>
+<span class="n">tokenHandler</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>       <span class="c">#get our token</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>These 4 lines are needed at the start of any script. They are effectively the setting up of the library. This involves</dt>
+<dd><ul class="first last simple">
+<li>loading your PyHuddle settings</li>
+<li>choosing an HTTP adapter to use</li>
+<li>getting an access token</li>
+<li>talking to huddle and hitting /entry/</li>
+</ul>
+</dd>
+</dl>
+<p>Now that we have hit your /entry/ folder we can enter a workspace, get our workspace calandar and and look at our tasks</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ws</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getWorkSpaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">calandar</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">getCalandar</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">ws</span><span class="o">.</span><span class="n">getTasks</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">metaData</span><span class="o">.</span><span class="n">getTitle</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-new-task">
+<h3>Create a new task<a class="headerlink" href="#create-a-new-task" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s">&quot;config.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span>    <span class="c">#grab our config info</span>
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HttpAdapterHttpUrlLib</span><span class="p">()</span>       <span class="c">#pick a http library to use</span>
+<span class="n">tokenHandler</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>       <span class="c">#get our token</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>These 4 lines are needed at the start of any script. They are effectively the setting up of the library. This involves</dt>
+<dd><ul class="first last simple">
+<li>loading your PyHuddle settings</li>
+<li>choosing an HTTP adapter to use</li>
+<li>getting an access token</li>
+<li>talking to huddle and hitting /entry/</li>
+</ul>
+</dd>
+</dl>
+<p>Now that we have hit your /entry/ folder we can enter a workspace, get our workspace calandar and create a task</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ws</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getWorkSpaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">document</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">getFolders</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getDocuments</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="c">#get us the first document in the first folder in the first workspace</span>
+<span class="n">calandar</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">getCalandar</span><span class="p">()</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">calandar</span><span class="o">.</span><span class="n">createTask</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">&quot;description&quot;</span><span class="p">,</span> <span class="n">CompletedBy</span> <span class="o">=</span> <span class="s">&quot;2011-05-05T16:12:47&quot;</span><span class="p">,</span>  <span class="n">attachments</span><span class="o">=</span><span class="p">[</span><span class="n">document</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Calandar</a><ul>
+<li><a class="reference internal" href="#module-interface">Module Interface</a><ul>
+<li><a class="reference internal" href="#id1">Calandar</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorials">Tutorials</a><ul>
+<li><a class="reference internal" href="#get-a-list-of-all-tasks">Get a list of all tasks</a></li>
+<li><a class="reference internal" href="#create-a-new-task">Create a new task</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="oauth2.html"
+                        title="previous chapter">OAuth2</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="comments.html"
+                        title="next chapter">Comments</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/calandar.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="comments.html" title="Comments"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="oauth2.html" title="OAuth2"
+             >previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Adam Flax.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

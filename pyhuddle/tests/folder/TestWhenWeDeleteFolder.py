@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Folder
+from pyhuddle.files.files import Folder
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.folder.FakeFolderServers.fakeFolderDelete import FakeFolderDelete
@@ -28,7 +28,7 @@ class WhenWeDeleteFolder(unittest.TestCase):
        self.assertIsInstance(self.result, Folder)
 
     def test_makeSureGraveyardHaBeenIncreased(self):
-        self.assertEqual(len(self.folder.lazyGet().graveyard), 1)
+        self.assertEqual(len(self.folder.metaData.graveyard), 1)
 
 
 if __name__ == '__main__':

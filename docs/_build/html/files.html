@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Files &mdash; PyHuddle 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PyHuddle 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Tasks" href="tasks.html" />
+    <link rel="prev" title="Comments" href="comments.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tasks.html" title="Tasks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="comments.html" title="Comments"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="files">
+<h1>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h1>
+<p>That has a paragraph about a main subject and is set when the &#8216;=&#8217;
+is at least the same length of the title itself.</p>
+<div class="section" id="module-interface">
+<h2>Module Interface<a class="headerlink" href="#module-interface" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="documents">
+<h3>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>class <em>files</em>.<strong>Document</strong>(api.Api)</dt>
+<dd><p class="first">An api class for performing operations with Huddle&#8217;s documents</p>
+<dl class="last docutils">
+<dt><strong>__init__</strong>(self, client, documentLink)</dt>
+<dd><p class="first"><em>HuddleClient</em> client: An instance of the HuddleClient class</p>
+<p class="last"><em>String</em> link: a URI pointing to our document  resource</p>
+</dd>
+<dt><strong>refresh</strong>()</dt>
+<dd>as all api objects are immutable they will not update. If for some reason you wish to force it to update you can do so by calling the refresh method. This will return a Document object of the resource but with updated meta data.</dd>
+<dt><strong>delete</strong>()</dt>
+<dd>deletes the document and stores a refresh to the document in this documents graveyard. This method will then return the parent folder</dd>
+<dt><strong>restore</strong>()</dt>
+<dd>restores this document if it has been deleted <strong>and</strong> it has a reference of it in the graveyard, it will then remove the reference to this document from the graveyard</dd>
+<dt><strong>update</strong>(self, tiele=None, description=None)</dt>
+<dd><p class="first"><em>String</em> title: the title of the folder
+<em>String</em> description: the description of the folder</p>
+<p>updates the documents name and/or description. Returns a document object of the updated document</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you update the document and call items in <tt class="docutils literal"><span class="pre">metaData</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>copyTo</strong>(self, folder)</dt>
+<dd><p class="first"><em>Folder</em> folder: the folder object you wish to copy the document to</p>
+<p class="last">copies the document to a folder, Returns a document object of the copied document</p>
+</dd>
+<dt><strong>createNewVersion</strong>(self, file, title=None, description=None, versionNote = None)</dt>
+<dd><p class="first"><em>File</em> file: a file opened with binary reading i.e if you are rading from a file do it like this <tt class="docutils literal"><span class="pre">open(&quot;file</span> <span class="pre">path&quot;,</span> <span class="pre">&quot;rb&quot;)</span></tt></p>
+<p><em>String</em> title: a title of the document
+<em>String</em> description a description of the document
+<em>String</em> version note: a version note about the new document</p>
+<p>Locks the document and uploads the new version of this document after it has done this it will unlock the document, if all went well it will return a Document Object of the new document</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you create a new version of the document and call items in <tt class="docutils literal"><span class="pre">metaData</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>__createLock</strong>()</dt>
+<dd><p class="first">locks the document and returns the HTTP response of the lock</p>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You should never have to call this method as functions that need to lock do it for you automatically. It is here for completeness only.</p>
+</div>
+</dd>
+<dt><strong>__deleteLock</strong>(self url)</dt>
+<dd><p class="first"><em>String</em> url: the url of the lock to unlock</p>
+<p>unlocks the document and returns the HTTP response of the lock</p>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You should never have to call this method as functions that need to unlock  a doucment do it for you automatically. It is here for completeness only.</p>
+</div>
+</dd>
+<dt><strong>download</strong>(self)</dt>
+<dd>returns a dictionary of the data you will need to construct a file on the users computer. This method does not physically download the file, It just provided the data so that you can make that download happen
+The dictionary returned is {&#8220;filename&#8221;: name, &#8220;mime&#8221; : mimetype, &#8220;binary&#8221; : content of the file}</dd>
+<dt><strong>moveTo</strong>(self, folder)</dt>
+<dd><p class="first"><em>Folder</em> folder: the folder object you wish to move document to</p>
+<p class="last">moves the document to a folder, Returns a document object of the moved document</p>
+</dd>
+<dt><strong>versionHistory</strong>(self)</dt>
+<dd>returns a dictionary of the version history of the object</dd>
+<dt><strong>getComments</strong>(self)</dt>
+<dd>returns the comments on the document as a Comments Object</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="folders">
+<h3>Folders<a class="headerlink" href="#folders" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>class <em>files</em>.<strong>Folder</strong>(api.Api)</dt>
+<dd><p class="first">An api class for performing operations with Huddle&#8217;s folders</p>
+<dl class="last docutils">
+<dt><strong>__init__</strong>(self, client, folderLink)</dt>
+<dd><p class="first"><em>HuddleClient</em> client: An instance of the HuddleClient class</p>
+<p class="last"><em>String</em> link: a URI pointing to our folder resource</p>
+</dd>
+<dt><strong>refresh</strong>()</dt>
+<dd>As all api objects are immutable they will not update. If for some reason you wish to force it to update you can do so by calling the refresh method. This will return a Folder object of the resource but with updated meta data.</dd>
+<dt><strong>getFolders</strong>()</dt>
+<dd>returns a list of all sub folders as a list of Folder objects</dd>
+<dt><strong>getDocuments</strong>()</dt>
+<dd>returns a list of all documents in the folders as a list of Document objects</dd>
+<dt><strong>createDocument</strong>(self, file, description=&#8221;&#8221;, index=None)</dt>
+<dd><p class="first"><em>File</em> file: a file opened with binary reading i.e if you are rading from a file do it like this <tt class="docutils literal"><span class="pre">open(&quot;file</span> <span class="pre">path&quot;,</span> <span class="pre">&quot;rb&quot;)</span></tt></p>
+<p><em>String</em> description a description of the document</p>
+<p><em>Int</em> index: the folder/subfolder you wish to create the document in, if you don&#8217;t specify a number it will upload it to this folder, if you specify a number it will upload it to this folders  sub folder e.g. index=0 will upload the document to the first sub folder in this folder</p>
+<p>Attemtps to create a new document and upload the content you specified in the file to it. If it succeeds it will be returned as a Document object</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you create a document and call <tt class="docutils literal"><span class="pre">getDocuments()</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>createFolder</strong>(self, file, description=&#8221;&#8221;, index=None)</dt>
+<dd><p class="first"><em>String</em> title: a title of the folder</p>
+<p><em>String</em> description a description of the folder</p>
+<p><em>Int</em> index: the folder/subfolder you wish to put the folder into, if you don&#8217;t specify a number it will create the folder in this folder, if you specify a number it will upload it to this folders sub folder e.g. index=0 will create the folder in the first sub folder in this folder</p>
+<p>Attemtps to create a new folder, if it succeeds it will return the newly created folder as a folder object</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you create a folder and call <tt class="docutils literal"><span class="pre">getFolder()</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>updateFolder</strong>(self, title=None, description=None, index=None)</dt>
+<dd><blockquote class="first">
+<div><em>String</em> title: a title of the folder</div></blockquote>
+<p><em>String</em> description a description of the folder</p>
+<p><em>Int</em> index: the folder/subfolder you wish to update, if you don&#8217;t specify a number it will update this folder, if you specify a number it will update that subfolder instead e.g. index=0 will update the folder in the first sub folder in this folder</p>
+<p>Updates the meta data of the folder. If it succeeds it will return a folder object of the updated folder</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you update a folder and call <tt class="docutils literal"><span class="pre">getFolder()</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>deleteFolder</strong>(self, index=None)</dt>
+<dd><p class="first"><em>Int</em> index: the folder/subfolder you wish to delete, if you don&#8217;t specify a number it will delete this folder, if you specify a number it will delete that subfolder instead e.g. index=0 will delete the folder in the first sub folder in this folder</p>
+<p>Deletes the specified folder and all of it sub folders and documents, if it succeeds it will return the parent folder of the folder you just deleted as a folder resource. If you delete a folder its meta data will be stored in the graveyard</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you delete a folder and call <tt class="docutils literal"><span class="pre">getFolder()</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>restoreFolder</strong>(self, index)</dt>
+<dd><p class="first"><em>Int</em> index: the position in the graveyards list of the folder you wish to restore e.g. restore(0) will restore the first folder in the graveyard</p>
+<p>Updates the meta data of the folder. If it succeeds it will return a folder object of the updated folder and remove the metadata from the graveyard</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you restore a folder and call <tt class="docutils literal"><span class="pre">getFolder()</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>moveTo</strong>(self, folder)</dt>
+<dd><p class="first"><em>Folder</em> folder: the folder object you wish to move the folder and all of its sub folders and files to</p>
+<p>moves the folder to a parernt folder, Returns a folder object of the folder you just moved the folder to</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">please remember api objects are immutable so if you move a folder and call <tt class="docutils literal"><span class="pre">getFolder()</span></tt> you will not see the changes unless you refresh first</p>
+</div>
+</dd>
+<dt><strong>copyTo</strong>(self, folder)</dt>
+<dd><p class="first"><em>Folder</em> folder: the folder object you wish to move the folder and all of its sub folders and files to</p>
+<p class="last">copies the folder to a parernt folder, Returns a folder object of the folder you just copied the folder to</p>
+</dd>
+<dt><strong>editPermissions</strong>(self, json)</dt>
+<dd><em>String</em> json: the json string structure of the permissions</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="workspace">
+<h3>Workspace<a class="headerlink" href="#workspace" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt>class <em>files</em>.<strong>Workspace</strong>(api.Api)</dt>
+<dd><p class="first">An api class for performing operations with Huddle&#8217;s folders</p>
+<dl class="last docutils">
+<dt><strong>__init__</strong>(self, client, workspaceLink)</dt>
+<dd><p class="first"><em>HuddleClient</em> client: An instance of the HuddleClient class</p>
+<p class="last"><em>String</em> link: a URI pointing to our workspace resource</p>
+</dd>
+<dt><strong>refresh</strong>()</dt>
+<dd>As all api objects are immutable they will not update. If for some reason you wish to force it to update you can do so by calling the refresh method. This will return a Workspace object of the resource but with updated meta data.</dd>
+<dt><strong>getFolders</strong>()</dt>
+<dd>Returns a list of root folders in the workspace as a list of Folder objects</dd>
+<dt><strong>getCalandar</strong>()</dt>
+<dd>returns the workspace&#8217;s calandar as a calandar object</dd>
+<dt><strong>getWorkspaceID</strong>()</dt>
+<dd><p class="first">returns the workspaces ID as a int</p>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">you should never have to call this method, it is used specifically for the parts of the api that do not use hypermedia controls. It is here for completeness only.</p>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="make-a-new-folder-upload-a-file-to-it-move-the-folder">
+<h3>make a new folder, upload a file to it, move the folder<a class="headerlink" href="#make-a-new-folder-upload-a-file-to-it-move-the-folder" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s">&quot;config.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span>    <span class="c">#grab our config info</span>
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HttpAdapterHttpUrlLib</span><span class="p">()</span>       <span class="c">#pick a http library to use</span>
+<span class="n">tokenHandler</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>       <span class="c">#get our token</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>These 4 lines are needed at the start of any script. They are effectively the setting up of the library. This involves</dt>
+<dd><ul class="first last simple">
+<li>loading your PyHuddle settings</li>
+<li>choosing an HTTP adapter to use</li>
+<li>getting an access token</li>
+<li>talking to huddle and hitting /entry/</li>
+</ul>
+</dd>
+</dl>
+<p>Now that we have hit your /entry/ folder we can enter a workspace, get our folder</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ws</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getWorkSpaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">folder</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">getFolders</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span><span class="o">.</span><span class="n">createFolder</span><span class="p">(</span><span class="s">&quot;title&quot;</span><span class="p">,</span> <span class="s">&quot;description&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;file path&quot;</span><span class="p">,</span> <span class="s">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">folder</span><span class="o">.</span><span class="n">createDocument</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">&quot;description&quot;</span><span class="p">)</span>
+
+<span class="n">folderB</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">getFolder</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">folder</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">folderB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-the-first-sub-folder-in-a-folder-and-then-restore-it">
+<h3>delete the first sub folder in a folder and then restore it<a class="headerlink" href="#delete-the-first-sub-folder-in-a-folder-and-then-restore-it" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s">&quot;config.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span>    <span class="c">#grab our config info</span>
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HttpAdapterHttpUrlLib</span><span class="p">()</span>       <span class="c">#pick a http library to use</span>
+<span class="n">tokenHandler</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>       <span class="c">#get our token</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>These 4 lines are needed at the start of any script. They are effectively the setting up of the library. This involves</dt>
+<dd><ul class="first last simple">
+<li>loading your PyHuddle settings</li>
+<li>choosing an HTTP adapter to use</li>
+<li>getting an access token</li>
+<li>talking to huddle and hitting /entry/</li>
+</ul>
+</dd>
+</dl>
+<p>Now that we have hit your /entry/ folder we can enter a workspace, get our folder</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ws</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getWorkSpaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">folder</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">getFolders</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">folder</span><span class="o">.</span><span class="n">deleteFolder</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">folder</span><span class="o">.</span><span class="n">restoreFolder</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c">#the index here is what position the folder we just deleted in, is in on the graveyard</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="edit-permissions-of-the-folder">
+<h3>edit permissions of the folder<a class="headerlink" href="#edit-permissions-of-the-folder" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s">&quot;config.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span>    <span class="c">#grab our config info</span>
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HttpAdapterHttpUrlLib</span><span class="p">()</span>       <span class="c">#pick a http library to use</span>
+<span class="n">tokenHandler</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>       <span class="c">#get our token</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>These 4 lines are needed at the start of any script. They are effectively the setting up of the library. This involves</dt>
+<dd><ul class="first last simple">
+<li>loading your PyHuddle settings</li>
+<li>choosing an HTTP adapter to use</li>
+<li>getting an access token</li>
+<li>talking to huddle and hitting /entry/</li>
+</ul>
+</dd>
+</dl>
+<p>Now that we have hit your /entry/ folder we can enter a workspace, get our folder</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ws</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">getWorkSpaces</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">folder</span> <span class="o">=</span> <span class="n">ws</span><span class="o">.</span><span class="n">getFolders</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">permissions</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">                {</span>
+<span class="s">                        &quot;link&quot;: { &quot;rel&quot;: &quot;self&quot;, &quot;href&quot;: &quot;/folders/123/permissions&quot; },</span>
+
+<span class="s">                        &quot;permissionChange&quot;: [</span>
+<span class="s">                        {</span>
+<span class="s">                                &quot;cascade&quot;: &quot;false&quot;,</span>
+<span class="s">                                &quot;team&quot;:</span>
+<span class="s">                                        {</span>
+<span class="s">                                                &quot;title&quot;: &quot;teamA&quot;,</span>
+<span class="s">                                                &quot;type&quot;: &quot;members&quot;,</span>
+<span class="s">                                                &quot;link&quot;: { &quot;rel&quot;: &quot;self&quot;, &quot;href&quot;: &quot;/teams/12345&quot; },</span>
+<span class="s">                                                &quot;permissions&quot;: { &quot;permission&quot;: [ { &quot;type&quot;: &quot;Read&quot; }, { &quot;type&quot;: &quot;Edit&quot; } ] }</span>
+<span class="s">                                        }</span>
+<span class="s">                        },</span>
+<span class="s">                        {</span>
+<span class="s">                                &quot;cascade&quot;: &quot;true&quot;,</span>
+<span class="s">                                &quot;team&quot;:</span>
+<span class="s">                                        {</span>
+<span class="s">                                                &quot;title&quot;: &quot;teamB&quot;,</span>
+<span class="s">                                                &quot;type&quot;: &quot;members&quot;,</span>
+<span class="s">                                                &quot;link&quot;: { &quot;rel&quot;: &quot;self&quot;, &quot;href&quot;: &quot;/teams/22345&quot;  }, &quot;permissions&quot;: &quot; &quot;}</span>
+<span class="s">                                        }</span>
+<span class="s">                        }]</span>
+<span class="s">                }</span>
+<span class="s">&quot;&quot;&quot;</span>
+
+<span class="n">folder</span><span class="o">.</span><span class="n">editPermissions</span><span class="p">(</span><span class="n">permissions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Files</a><ul>
+<li><a class="reference internal" href="#module-interface">Module Interface</a><ul>
+<li><a class="reference internal" href="#documents">Documents</a></li>
+<li><a class="reference internal" href="#folders">Folders</a></li>
+<li><a class="reference internal" href="#workspace">Workspace</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorials">Tutorials</a><ul>
+<li><a class="reference internal" href="#make-a-new-folder-upload-a-file-to-it-move-the-folder">make a new folder, upload a file to it, move the folder</a></li>
+<li><a class="reference internal" href="#delete-the-first-sub-folder-in-a-folder-and-then-restore-it">delete the first sub folder in a folder and then restore it</a></li>
+<li><a class="reference internal" href="#edit-permissions-of-the-folder">edit permissions of the folder</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="comments.html"
+                        title="previous chapter">Comments</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tasks.html"
+                        title="next chapter">Tasks</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/files.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tasks.html" title="Tasks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="comments.html" title="Comments"
+             >previous</a> |</li>
+        <li><a href="index.html">PyHuddle 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Adam Flax.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

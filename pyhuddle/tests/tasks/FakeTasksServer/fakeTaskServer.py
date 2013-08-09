@@ -53,6 +53,6 @@ class FakeTaskServer(fakeServer):
     "id": 18279,
     "title": "foo",
     "description": "bar",
-    "uri": "http://api.huddle.dev/v2/calendar/events/18279"
+    "uri": "http://api.huddle.dev/v2/calandar/events/18279"
 }
                 """

@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Folder
+from pyhuddle.files.files import Folder
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.folder.FakeFolderServers.fakeFolderCreate import FakeFolderCreate
@@ -25,10 +25,10 @@ class WhenWeCreateFolder(unittest.TestCase):
         self.assertIsInstance(self.result, Folder)
 
     def test_makeSureWeGotFolderWeWanted(self):
-        self.assertEqual("I am a title", self.result.lazyGet().getTitle())
+        self.assertEqual("I am a title", self.result.metaData.getTitle())
 
     def test_makeSureWeGteDescriptionWeWantedFromCreateWithDescription(self):
-        self.assertEqual("description", self.result.lazyGet().getDescription())
+        self.assertEqual("description", self.result.metaData.getDescription())
 
 if __name__ == '__main__':
     unittest.main()

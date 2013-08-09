@@ -1,5 +1,5 @@
 import unittest
-from pyhuddle.api.files.files import Folder
+from pyhuddle.files.files import Folder
 from pyhuddle.api.huddle_client import HuddleClient
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.folder.FakeFolderServers.fakeFolderRestore import FakeFolderRestore
@@ -20,7 +20,7 @@ class WhenWeRestoreFolder(unittest.TestCase):
 
         self.client = HuddleClient(handleAccessToken, request, config)
         self.folder = Folder(self.client, "IAmAFakeUrl")
-        self.folder.lazyGet().graveyard.append(self.folder.lazyGet()) #add to graveyard
+        self.folder.metaData.graveyard.append(self.folder.metaData) #add to graveyard
 
         self.result = self.folder.restoreFolder(0)
 
@@ -31,7 +31,7 @@ class WhenWeRestoreFolder(unittest.TestCase):
         self.assertIsInstance(self.result, Folder)
 
     def test_makeSureGraveyardHaBeenIncreased(self):
-        self.assertEqual(len(self.folder.lazyGet().graveyard), 0)
+        self.assertEqual(len(self.folder.metaData.graveyard), 0)
 
 
 if __name__ == '__main__':

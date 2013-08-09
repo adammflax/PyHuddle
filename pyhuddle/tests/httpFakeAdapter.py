@@ -15,7 +15,7 @@ class HttpFakeAdapter(Adapter):
         """
         response = self.fakeServer.get(url, header)
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
 
         return response
 
@@ -25,7 +25,7 @@ class HttpFakeAdapter(Adapter):
         """
         response = self.fakeServer.delete(url, header)
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
         return response
 
     def postRequest(self, url, header, body):
@@ -34,7 +34,7 @@ class HttpFakeAdapter(Adapter):
         """
         response = self.fakeServer.post(url, body, header)
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
         return response
 
 
@@ -44,7 +44,7 @@ class HttpFakeAdapter(Adapter):
         """
         response = self.fakeServer.put(url, body, header)
 
-        self._huddleErrors.handleResponseError(response)
+        self._huddleErrors.CheckForErrors(response)
         return response
 
 

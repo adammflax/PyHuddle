@@ -1,6 +1,6 @@
 import unittest
 from pyhuddle.api.huddle_client import HuddleClient
-from pyhuddle.api.user.user import User
+from pyhuddle.user.user import User
 from pyhuddle.tests.fakeParser import FakeParser
 from pyhuddle.tests.httpFakeAdapter import HttpFakeAdapter
 from pyhuddle.tests.login.fakeHandleAccessToken import FakeHandleAccessToken
