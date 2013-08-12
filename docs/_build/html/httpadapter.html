@@ -194,7 +194,7 @@ The reason for this class is that according to the HTTP specification headers ar
 </tr>
 </tbody>
 </table>
-<p>Bearing all of this in mind we can now right our adapter for the HttpLib2 adapter:</p>
+<p>Bearing all of this in mind we can now write our adapter for the HttpLib2 adapter:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">adapterHttpLib2</span><span class="p">(</span><span class="n">Adapter</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_huddleErrors</span> <span class="o">=</span> <span class="n">HandleCodeResponse</span><span class="p">()</span>

@@ -69,6 +69,7 @@ Tutorials
 Edit a task
 ````````
 ::
+
 	config = Config("config.ini").config 	#grab our config info
 	adapter = HttpAdapterHttpUrlLib() 	#pick a http library to use
 	tokenHandler = HandleAccessToken(adapter, config) 	#get our token

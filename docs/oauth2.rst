@@ -107,8 +107,7 @@ PyHuddle abstracts most of the OAuth protocol away. Generally all you need to do
 	tokenHandler = HandleAccessToken(adapter, config) 	#get our token
 	client = HuddleClient(tokenHandler, adapter, config) #all api requests need to start with this. This allows us to hit /entry
 	
-Sometimes you may want to change the OAuth flow to get an access token. This will mostly be done in systems in which it is unsuitable for the user to paste in an auth code into the application such as websites. Check out
-the tutorial page on how to do this.
+Sometimes you may want to change the OAuth flow to get an access token. This will mostly be done in systems in which it is unsuitable for the user to paste in an auth code into the application such as websites. Check out the create your own way to get an access token tutorial on how to do this
 
 .. seealso:: see  foo on setting up your config file for pyHuddle.
 
@@ -131,6 +130,7 @@ This request is done by sending a POST request to Huddles server which contains:
 
 			body = {"grant_type": "password",
 					"client_id": self._config['OAUTH2']['clientID'],
+					"client_secret": self._config['OAUTH2]['clientSecret'],
 					"redirect_uri": self._config['OAUTH2']['redirectUri'],
 					"username": self._config['OAUTH2']['username'],
 					"password" : self._config['OAUTH2']['password]}

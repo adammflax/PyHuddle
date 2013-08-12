@@ -137,7 +137,7 @@ The responses we get back server are going to be different depending on the requ
 |Location       |The URI that the new resource can be found at.| 
 +---------------+----------------------------------------------+
 
-Bearing all of this in mind we can now right our adapter for the HttpLib2 adapter::
+Bearing all of this in mind we can now write our adapter for the HttpLib2 adapter::
 
 	class adapterHttpLib2(Adapter):
 		def __init__(self):

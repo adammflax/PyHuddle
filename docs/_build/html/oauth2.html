@@ -178,8 +178,7 @@ returns an access token by performing 3 legged OAuth by out of band.</dd>
 <span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
 </pre></div>
 </div>
-<p>Sometimes you may want to change the OAuth flow to get an access token. This will mostly be done in systems in which it is unsuitable for the user to paste in an auth code into the application such as websites. Check out
-the tutorial page on how to do this.</p>
+<p>Sometimes you may want to change the OAuth flow to get an access token. This will mostly be done in systems in which it is unsuitable for the user to paste in an auth code into the application such as websites. Check out the create your own way to get an access token tutorial on how to do this</p>
 <div class="admonition-see-also admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">see  foo on setting up your config file for pyHuddle.</p>
@@ -205,6 +204,7 @@ change the flow by getting an access token with a password profile rather then b
 
         body = {&quot;grant_type&quot;: &quot;password&quot;,
                         &quot;client_id&quot;: self._config[&#x27;OAUTH2&#x27;][&#x27;clientID&#x27;],
+                        &quot;client_secret&quot;: self._config[&#x27;OAUTH2][&#x27;clientSecret&#x27;],
                         &quot;redirect_uri&quot;: self._config[&#x27;OAUTH2&#x27;][&#x27;redirectUri&#x27;],
                         &quot;username&quot;: self._config[&#x27;OAUTH2&#x27;][&#x27;username&#x27;],
                         &quot;password&quot; : self._config[&#x27;OAUTH2&#x27;][&#x27;password]}

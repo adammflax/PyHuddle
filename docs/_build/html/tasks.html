@@ -132,12 +132,13 @@ updated meta data.</dd>
 <h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="edit-a-task">
 <h3>Edit a task<a class="headerlink" href="#edit-a-task" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="s">&quot;config.ini&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span>    <span class="c">#grab our config info</span>
+<span class="n">adapter</span> <span class="o">=</span> <span class="n">HttpAdapterHttpUrlLib</span><span class="p">()</span>       <span class="c">#pick a http library to use</span>
+<span class="n">tokenHandler</span> <span class="o">=</span> <span class="n">HandleAccessToken</span><span class="p">(</span><span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>       <span class="c">#get our token</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">HuddleClient</span><span class="p">(</span><span class="n">tokenHandler</span><span class="p">,</span> <span class="n">adapter</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="c">#all api requests need to start with this. This allows us to hit /entry</span>
+</pre></div>
+</div>
 <dl class="docutils">
-<dt>::</dt>
-<dd>config = Config(&#8220;config.ini&#8221;).config    #grab our config info
-adapter = HttpAdapterHttpUrlLib()       #pick a http library to use
-tokenHandler = HandleAccessToken(adapter, config)       #get our token
-client = HuddleClient(tokenHandler, adapter, config) #all api requests need to start with this. This allows us to hit /entry</dd>
 <dt>These 4 lines are needed at the start of any script. They are effectively the setting up of the library. This involves</dt>
 <dd><ul class="first last simple">
 <li>loading your PyHuddle settings</li>
